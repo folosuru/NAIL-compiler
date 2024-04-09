@@ -1,0 +1,6 @@
+#ifndef NTSL_CL_NODEINCLUDELIST_HPP
+#define NTSL_CL_NODEINCLUDELIST_HPP
+#include <nodeTree/number/Int32Node.hpp>
+
+
+#endif //NTSL_CL_NODEINCLUDELIST_HPP
