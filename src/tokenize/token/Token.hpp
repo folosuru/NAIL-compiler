@@ -1,8 +1,8 @@
-#ifndef NTSL_CL_TOKEN_HPP
-#define NTSL_CL_TOKEN_HPP
+#ifndef NAIL_CL_TOKEN_HPP
+#define NAIL_CL_TOKEN_HPP
 #include <memory>
 #include <cstdint>
-namespace NTSL_cl::Token {
+namespace NAIL_cl::Token {
 
     enum class TokenType {
         Preserved_word,
@@ -37,4 +37,4 @@ namespace NTSL_cl::Token {
 
 }
 
-#endif //NTSL_CL_TOKEN_HPP
+#endif //NAIL_CL_TOKEN_HPP

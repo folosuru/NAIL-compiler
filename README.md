@@ -1,2 +1,2 @@
 # NTSL
-Like C++ language, NaTtoku-Suru-Language.
+Like C++ language, NAttoku-Iku-Language.

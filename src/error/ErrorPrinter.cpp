@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
-namespace NTSL_cl {
+namespace NAIL_cl {
     namespace ErrorPrinter {
         void print(const std::shared_ptr<TokenList>& list,
                    const std::shared_ptr<Token::Token>& token,
@@ -22,4 +22,4 @@ namespace NTSL_cl {
 
     }
 
-} // NTSL_cl
+} // NAIL_cl

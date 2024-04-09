@@ -1,6 +1,6 @@
 #include "NumberToken.hpp"
 #include <iostream>
-namespace NTSL_cl::Token {
+namespace NAIL_cl::Token {
     NumberToken::NumberToken(std::string_view name, std::size_t line, std::int64_t pos, std::size_t number)
     : Token(name, line, pos), value(number) {
 
@@ -25,4 +25,4 @@ namespace NTSL_cl::Token {
         return TokenType::number;
     }
 
-} // NTSL_cl::Token
+} // NAIL_cl::Token

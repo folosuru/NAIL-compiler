@@ -1,7 +1,7 @@
 #include "PreservedSymbol.hpp"
 
 
-namespace NTSL_cl::Token {
+namespace NAIL_cl::Token {
     PreservedSymbol::PreservedSymbol(std::string_view name, std::size_t line, std::int64_t pos, Symbol_type type)
       : Token(name, line, pos) , type(type) {}
 
@@ -44,4 +44,4 @@ namespace NTSL_cl::Token {
         }
     }
 
-} // NTSL_cl::Token
+} // NAIL_cl::Token

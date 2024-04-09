@@ -6,7 +6,7 @@
 #include <tokenize/token/IdentifyToken.hpp>
 #include <tokenize/token/PreservedSymbol.hpp>
 #include <tokenize/token/NumberToken.hpp>
-namespace NTSL_cl {
+namespace NAIL_cl {
     using Token_ptr = std::shared_ptr<Token::Token>;
     namespace {
 
@@ -59,4 +59,4 @@ namespace NTSL_cl {
         }
         return token_list.at(pos);
     }
-} // NTSL_cl
+} // NAIL_cl

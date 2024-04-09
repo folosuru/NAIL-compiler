@@ -1,8 +1,8 @@
-#ifndef NTSL_CL_ERRORPRINTER_HPP
-#define NTSL_CL_ERRORPRINTER_HPP
+#ifndef NAIL_CL_ERRORPRINTER_HPP
+#define NAIL_CL_ERRORPRINTER_HPP
 #include <tokenize/TokenList.hpp>
 #include <tokenize/token/Token.hpp>
-namespace NTSL_cl {
+namespace NAIL_cl {
 
     namespace ErrorPrinter {
         [[noreturn]]
@@ -10,5 +10,5 @@ namespace NTSL_cl {
 
     };
 
-} // NTSL_cl
-#endif //NTSL_CL_ERRORPRINTER_HPP
+} // NAIL_cl
+#endif //NAIL_CL_ERRORPRINTER_HPP

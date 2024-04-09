@@ -16,9 +16,9 @@ int main(int argc, char** argv) {
             text.push_back(buf);
         }
 
-        std::shared_ptr<NTSL_cl::TokenList> token = std::make_shared<NTSL_cl::TokenList>(text);
+        std::shared_ptr<NAIL_cl::TokenList> token = std::make_shared<NAIL_cl::TokenList>(text);
         token->print();
-        NTSL_cl::Node::primary(token);
+        NAIL_cl::Node::primary(token);
     }
 
 }

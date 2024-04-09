@@ -1,11 +1,11 @@
-#ifndef NTSL_CL_PLUSNODE_HPP
-#define NTSL_CL_PLUSNODE_HPP
+#ifndef NAIL_CL_PLUSNODE_HPP
+#define NAIL_CL_PLUSNODE_HPP
 #include <nodeTree/Node.hpp>
 #include <memory>
 #include <cstdint>
 #include <utility>
 #include "tokenize/TokenList.hpp"
-namespace NTSL_cl {
+namespace NAIL_cl {
 
     class PlusNode : public Node_parent{
 
@@ -21,6 +21,6 @@ namespace NTSL_cl {
         NodeType left, right;
     };
 
-} // NTSL_cl
+} // NAIL_cl
 
-#endif //NTSL_CL_PLUSNODE_HPP
+#endif //NAIL_CL_PLUSNODE_HPP

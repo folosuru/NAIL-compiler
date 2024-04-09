@@ -1,7 +1,7 @@
 #include "PreservedKeyword.hpp"
 #include <memory>
 
-namespace NTSL_cl::Token {
+namespace NAIL_cl::Token {
     PreservedKeyword::PreservedKeyword(std::string_view name, std::size_t line, std::int64_t pos, PreservedKeyword::word_type type)
       : Token(name, line, pos) , type(type) {}
 
@@ -18,4 +18,4 @@ namespace NTSL_cl::Token {
     }
 
 
-} // NTSL_cl::Token
+} // NAIL_cl::Token

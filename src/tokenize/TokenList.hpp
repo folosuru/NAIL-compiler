@@ -5,7 +5,7 @@
 #include <memory>
 #include <tokenize/token/Token.hpp>
 
-namespace NTSL_cl {
+namespace NAIL_cl {
 
     using Token_ptr = std::shared_ptr<Token::Token>;
 
@@ -33,6 +33,6 @@ namespace NTSL_cl {
         std::size_t current_pos = 0;
     };
 
-} // NTSL_cl
+} // NAIL_cl
 
 #endif //NTSL_CL_TOKENLIST_HPP

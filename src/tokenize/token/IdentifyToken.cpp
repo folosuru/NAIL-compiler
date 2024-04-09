@@ -2,7 +2,7 @@
 #include <iostream>
 #include "PreservedKeyword.hpp"
 
-namespace NTSL_cl::Token {
+namespace NAIL_cl::Token {
     IdentifyToken::IdentifyToken(std::string_view name, std::size_t line, std::int64_t pos) : Token(name, line, pos) {
 
     }
@@ -37,4 +37,4 @@ namespace NTSL_cl::Token {
             return std::make_shared<IdentifyToken>(string, line, start);
         }
     }
-} // NTSL_cl::Token
+} // NAIL_cl::Token

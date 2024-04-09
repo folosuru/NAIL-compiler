@@ -1,8 +1,8 @@
-#ifndef NTSL_CL_NUMBERTOKEN_HPP
-#define NTSL_CL_NUMBERTOKEN_HPP
+#ifndef NAIL_CL_NUMBERTOKEN_HPP
+#define NAIL_CL_NUMBERTOKEN_HPP
 #include <tokenize/token/Token.hpp>
 
-namespace NTSL_cl::Token {
+namespace NAIL_cl::Token {
 
     class NumberToken : public Token{
     public:
@@ -20,6 +20,6 @@ namespace NTSL_cl::Token {
     };
 
 
-} // NTSL_cl::Token
+} // NAIL_cl::Token
 
-#endif //NTSL_CL_NUMBERTOKEN_HPP
+#endif //NAIL_CL_NUMBERTOKEN_HPP

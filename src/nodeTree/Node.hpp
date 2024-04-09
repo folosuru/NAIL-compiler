@@ -1,7 +1,7 @@
-#ifndef NTSL_CL_NODE_HPP
-#define NTSL_CL_NODE_HPP
+#ifndef NAIL_CL_NODE_HPP
+#define NAIL_CL_NODE_HPP
 #include <memory>
-namespace NTSL_cl {
+namespace NAIL_cl {
 
 
     class Node_parent {
@@ -12,6 +12,6 @@ namespace NTSL_cl {
     };
     using NodeType = std::shared_ptr<Node_parent>;
 
-} // NTSL_cl
+} // NAIL_cl
 
-#endif //NTSL_CL_NODE_HPP
+#endif //NAIL_CL_NODE_HPP

@@ -1,9 +1,9 @@
-#ifndef NTSL_CL_PRESERVEDSYMBOL_HPP
-#define NTSL_CL_PRESERVEDSYMBOL_HPP
+#ifndef NAIL_CL_PRESERVEDSYMBOL_HPP
+#define NAIL_CL_PRESERVEDSYMBOL_HPP
 #include <string>
 #include <tokenize/token/Token.hpp>
 
-namespace NTSL_cl::Token {
+namespace NAIL_cl::Token {
 
     class PreservedSymbol : public Token{
     public:
@@ -31,6 +31,6 @@ namespace NTSL_cl::Token {
         Symbol_type type;
 
     };
-} // NTSL_cl::Token
+} // NAIL_cl::Token
 
-#endif //NTSL_CL_PRESERVEDSYMBOL_HPP
+#endif //NAIL_CL_PRESERVEDSYMBOL_HPP

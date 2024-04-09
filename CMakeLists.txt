@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(NTSL-cl)
+project(NAIL-cl)
 set(CMAKE_CXX_STANDARD 20)
 
 file(GLOB_RECURSE SOURCES
@@ -7,4 +7,4 @@ file(GLOB_RECURSE SOURCES
     src/**.cpp
 )
 include_directories(src)
-add_executable(NTSL_cl ${SOURCES})
+add_executable(NAIL_cl ${SOURCES})

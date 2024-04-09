@@ -1,7 +1,7 @@
 #include <nodeTree/NodeGenerator.hpp>
 #include <nodeTree/NodeIncludeList.hpp>
 #include <error/ErrorPrinter.hpp>
-namespace NTSL_cl::Node {
+namespace NAIL_cl::Node {
     NodeType primary(const std::shared_ptr<TokenList>& list) {
         if (auto number = Int32Node::consume(list); number != nullptr) {
             return number;

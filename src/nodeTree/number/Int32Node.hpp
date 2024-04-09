@@ -1,12 +1,12 @@
-#ifndef NTSL_CL_INT32NODE_HPP
-#define NTSL_CL_INT32NODE_HPP
+#ifndef NAIL_CL_INT32NODE_HPP
+#define NAIL_CL_INT32NODE_HPP
 #include <nodeTree/Node.hpp>
 #include <cstdint>
 #include <memory>
 #include "tokenize/TokenList.hpp"
 #include <tokenize/token/NumberToken.hpp>
 
-namespace NTSL_cl {
+namespace NAIL_cl {
 
     class Int32Node : public Node_parent {
     public:
@@ -20,6 +20,6 @@ namespace NTSL_cl {
         std::int32_t value;
     };
 
-} // NTSL_cl
+} // NAIL_cl
 
-#endif //NTSL_CL_INT32NODE_HPP
+#endif //NAIL_CL_INT32NODE_HPP

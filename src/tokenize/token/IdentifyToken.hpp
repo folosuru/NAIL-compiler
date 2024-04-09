@@ -1,11 +1,11 @@
-#ifndef NTSL_CL_IDENTIFYTOKEN_HPP
-#define NTSL_CL_IDENTIFYTOKEN_HPP
+#ifndef NAIL_CL_IDENTIFYTOKEN_HPP
+#define NAIL_CL_IDENTIFYTOKEN_HPP
 #include <string>
 #include <tokenize/token/Token.hpp>
 
 
 
-namespace NTSL_cl::Token {
+namespace NAIL_cl::Token {
 
     class IdentifyToken : public Token {
     public:
@@ -21,6 +21,6 @@ namespace NTSL_cl::Token {
     private:
     };
 
-} // NTSL_cl::Token
+} // NAIL_cl::Token
 
-#endif //NTSL_CL_IDENTIFYTOKEN_HPP
+#endif //NAIL_CL_IDENTIFYTOKEN_HPP
