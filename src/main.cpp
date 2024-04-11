@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 
         std::shared_ptr<NAIL_cl::TokenList> token = std::make_shared<NAIL_cl::TokenList>(text);
         token->print();
-        NAIL_cl::Node::primary(token);
+        NAIL_cl::Node::add(token);
     }
 
 }

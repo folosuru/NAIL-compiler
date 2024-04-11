@@ -4,21 +4,15 @@
 #include <memory>
 #include <cstdint>
 #include <utility>
-#include "tokenize/TokenList.hpp"
+#include "nodeTree/BinaryTree.hpp"
+
 namespace NAIL_cl {
 
-    class PlusNode : public Node_parent{
+    class PlusNode : public BinaryTree{
 
     public:
-        explicit PlusNode(NodeType left, NodeType right) : left(std::move(left)), right(std::move(right)) {};
-
+        using BinaryTree::BinaryTree;
         ~PlusNode() override = default;
-
-        static std::shared_ptr<Node_parent> create(const NodeType& left, const NodeType& right);
-
-
-    private:
-        NodeType left, right;
     };
 
 } // NAIL_cl

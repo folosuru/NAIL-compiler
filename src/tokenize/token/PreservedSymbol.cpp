@@ -23,7 +23,7 @@ namespace NAIL_cl::Token {
                 pos = start + 2;
                 std::string_view text = std::string_view(str.begin() + start, str.begin() + pos);
                 if (text == "==") {
-                    return std::make_shared<PreservedSymbol>(text, line, pos, PreservedSymbol::Symbol_type::equal);
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::equal);
                 }
             }
 
@@ -31,10 +31,29 @@ namespace NAIL_cl::Token {
                 pos = start + 1;
                 std::string_view text = std::string_view(str.begin() + start, str.begin() + pos);
                 if (text == ",") {
-                    return std::make_shared<PreservedSymbol>(text, line, pos, PreservedSymbol::Symbol_type::comma);
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::comma);
                 }
                 if (text == "+") {
-                    return std::make_shared<PreservedSymbol>(text, line, pos, PreservedSymbol::Symbol_type::plus);
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::plus);
+                }
+                if (text == "-") {
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::minus);
+                }
+                if (text == "(") {
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::small_bracket_open);
+                }
+                if (text == ")") {
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::small_breacket_close);
+                }
+                if (text == "*") {
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::mlu);
+                }
+                if (text == "/") {
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::div);
+                }
+
+                if (text == ".") {
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::period);
                 }
             }
 

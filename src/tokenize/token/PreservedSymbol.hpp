@@ -9,8 +9,19 @@ namespace NAIL_cl::Token {
     public:
         enum class Symbol_type {
             plus,
+            minus,
             comma,
+            mlu,
+            div,
+            semi_coron,
+            coron,
+            period,
+
+            assign,
+
             equal,
+            small_bracket_open,
+            small_breacket_close
         };
 
         explicit PreservedSymbol(std::string_view name, std::size_t line, std::int64_t pos, Symbol_type type);
