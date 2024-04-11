@@ -16,10 +16,12 @@ namespace NAIL_cl {
     TokenList::TokenList(const std::vector<std::string>& text) : source_text(text) {
         std::size_t line_cnt;
         for (const auto& line : source_text) {
+            line_cnt++;
             std::int64_t current_pos_ = 0;
             while (current_pos_ < line.size()) {
                 if (std::isspace(line[current_pos_])) {
                     current_pos_++;
+                    continue;
                 }
                 if (push_token(Token::NumberToken::consume(line, line_cnt, current_pos_))) {
                     continue;
@@ -30,6 +32,8 @@ namespace NAIL_cl {
                 if (push_token(Token::PreservedSymbol::consume(line, line_cnt, current_pos_))) {
                     continue;
                 }
+                std::cout << "unknwon character:" << line[current_pos_]  << std::endl;
+                exit(0);
             }
         }
     }
