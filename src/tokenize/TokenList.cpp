@@ -63,4 +63,26 @@ namespace NAIL_cl {
         }
         return token_list.at(pos);
     }
+
+    bool TokenList::current_is(const std::string& target) {
+        auto current = getCurrent();
+        if (current) {
+            if (current->getString() == target) {
+                current_pos++;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool TokenList::current_is(Token::TokenType type) {
+        auto current = getCurrent();
+        if (current) {
+            if (current->getType() == type) {
+                current_pos++;
+                return true;
+            }
+        }
+        return false;
+    }
 } // NAIL_cl

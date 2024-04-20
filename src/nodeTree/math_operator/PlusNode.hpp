@@ -12,6 +12,7 @@ namespace NAIL_cl {
 
     public:
         using BinaryTree::BinaryTree;
+        void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>> &result) override;
         ~PlusNode() override = default;
     };
 

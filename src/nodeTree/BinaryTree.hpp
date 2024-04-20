@@ -13,7 +13,7 @@ namespace NAIL_cl {
         static NodeType create(NodeType left, NodeType right) {
             return std::shared_ptr<Node_parent>(new T(left, right));
         }
-    private:
+    protected:
         NodeType left, right;
     };
 

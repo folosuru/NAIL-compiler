@@ -6,6 +6,11 @@ namespace NAIL_cl::Node {
         if (auto number = Int32Node::consume(list); number != nullptr) {
             return number;
         }
+        if (auto number = Int32Node::consume(list); number != nullptr) {
+            return number;
+        }
+
+
         return nullptr;
     }
 
@@ -14,27 +19,22 @@ namespace NAIL_cl::Node {
         if (left == nullptr) {
             ErrorPrinter::print(list, list->getCurrent(), "unexpected token: need identifyer or number");
         }
-        if (list->getCurrent()->getString() != "(") {
+        if (!list->current_is("(")) {
             return left;
         }
-        list->getCurrentPos()++;
-
-        if (list->getCurrent()->getString() != ")") {
+        if (!list->current_is(")")) {
             ErrorPrinter::print(list, list->getCurrent(), "unexpected token: except )", ")");
         }
-        list->getCurrentPos()++;
         return left;
     }
 
     NodeType primary(const std::shared_ptr<TokenList>& list) {
         NodeType result;
-        if (list->getCurrent()->getString() == "(") {
-            list->getCurrentPos()++;
+        if (list->current_is("(")) {
             result = add(list);
-            if (list->getCurrent()->getString() != ")" ){
+            if (!list->current_is(")")){
                 ErrorPrinter::print(list, list->getCurrent(), "unexpected token: except )", ")");
             }
-            list->getCurrentPos()++;
             return result;
         }
 
@@ -44,8 +44,7 @@ namespace NAIL_cl::Node {
         }
 
         while (true) {
-            if (list->getCurrent()->getString() == ".") {
-                list->getCurrentPos()++;
+            if (list->current_is(".")) {
                 result = BinaryTree::create<MemberAccessNode>(result, function_call(list));
                 continue;
             }
@@ -54,12 +53,12 @@ namespace NAIL_cl::Node {
     }
 
     NodeType unary(const std::shared_ptr<TokenList>& list) {
-        if (list->getCurrent()->getString() == "+") {
+        if (list->current_is("+")) {
             list->getCurrentPos()++;
             return primary(list);
         }
 
-        if (list->getCurrent()->getString() == "-") {
+        if (list->current_is("-")) {
             list->getCurrentPos()++;
             return primary(list);
         }
@@ -70,13 +69,11 @@ namespace NAIL_cl::Node {
     NodeType mlu(const std::shared_ptr<TokenList>& list) {
         NodeType left = unary(list);
         while (true) {
-            if (list->getCurrent()->getString() == "*") {
-                list->getCurrentPos()++;
+            if (list->current_is("*")) {
                 left = BinaryTree::create<MluNode>(left, unary(list));
                 continue;
             }
-            if (list->getCurrent()->getString() == "/") {
-                list->getCurrentPos()++;
+            if (list->current_is("/")) {
                 left = BinaryTree::create<DivNode>(left, unary(list));
                 continue;
             }
@@ -87,13 +84,11 @@ namespace NAIL_cl::Node {
     NodeType add(const std::shared_ptr<TokenList>& list) {
         NodeType left = mlu(list);
         while (true) {
-            if (list->getCurrent()->getString() == "+") {
-                list->getCurrentPos()++;
+            if (list->current_is("+")) {
                 left = BinaryTree::create<PlusNode>(left, mlu(list));
                 continue;
             }
-            if (list->getCurrent()->getString() == "-") {
-                list->getCurrentPos()++;
+            if (list->current_is("-")) {
                 left = BinaryTree::create<SubNode>(left, mlu(list));
                 continue;
             }

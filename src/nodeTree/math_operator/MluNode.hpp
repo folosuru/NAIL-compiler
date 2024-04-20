@@ -7,6 +7,7 @@ namespace NAIL_cl {
     class MluNode : public BinaryTree {
     public:
         using BinaryTree::BinaryTree;
+        void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>> &result) override;
         ~MluNode() override = default;
     };
 
