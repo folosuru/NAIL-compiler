@@ -14,7 +14,7 @@ namespace NAIL_cl {
     }
 
     TokenList::TokenList(const std::vector<std::string>& text) : source_text(text) {
-        std::size_t line_cnt;
+        std::size_t line_cnt = 0;
         for (const auto& line : source_text) {
             line_cnt++;
             std::int64_t current_pos_ = 0;

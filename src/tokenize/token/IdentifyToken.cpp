@@ -1,5 +1,4 @@
 #include "IdentifyToken.hpp"
-#include <iostream>
 #include "PreservedKeyword.hpp"
 
 namespace NAIL_cl::Token {

@@ -6,6 +6,7 @@ namespace NAIL_cl {
 
     class IdentifySymbol {
     public:
+        [[nodiscard]]
         const std::string& getName() const;
 
         explicit IdentifySymbol(std::string);

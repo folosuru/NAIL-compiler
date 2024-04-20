@@ -2,6 +2,8 @@
 #define NAIL_CL_TOKEN_HPP
 #include <memory>
 #include <cstdint>
+#include <string_view>
+#include <string>
 namespace NAIL_cl::Token {
 
     enum class TokenType {

@@ -1,23 +1,24 @@
 #ifndef NAIL_CL_MLU_HPP
 #define NAIL_CL_MLU_HPP
 
+#include <utility>
+
 #include "backend/assembly/instruction/math/MathInstruction.hpp"
-namespace NAIL_cl {
-    namespace asm_obj {
 
-        class Mlu : public instruction {
-        public:
-            Mlu(std::shared_ptr<Operand> op) : mlu_by(op) {}
+namespace NAIL_cl::asm_obj {
 
-            std::string getString() override;
+    class Mlu : public instruction {
+    public:
+        explicit Mlu(std::shared_ptr<Operand> op) : mlu_by(std::move(op)) {}
 
-            bool has_effect(std::shared_ptr<Operand>) override;
+        std::string getString() override;
 
-        private:
-            std::shared_ptr<Operand> mlu_by;
-        };
+        bool has_effect(std::shared_ptr<Operand>) override;
 
-    } // asm_obj
-} // NAIL_cl
+    private:
+        std::shared_ptr<Operand> mlu_by;
+    };
+
+} // NAIL_cl::asm_obj
 
 #endif //NAIL_CL_MLU_HPP

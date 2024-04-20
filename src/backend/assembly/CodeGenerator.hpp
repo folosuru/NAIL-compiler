@@ -4,7 +4,7 @@
 #include <list>
 #include <backend/assembly/instruction/Instruction.hpp>
 namespace NAIL_cl::asm_obj {
-    std::list<std::shared_ptr<instruction>> getList(std::shared_ptr<Node_parent>);
+    std::list<std::shared_ptr<instruction>> getList(const std::shared_ptr<Node_parent>&);
     std::string getString(std::list<std::shared_ptr<instruction>>);
 } // NAIL_cl::asm_obj
 

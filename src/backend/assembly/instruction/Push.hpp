@@ -5,7 +5,7 @@ namespace NAIL_cl::asm_obj {
 
     class push : public instruction{
     public:
-        push(const std::shared_ptr<Operand>& target);
+        explicit push(const std::shared_ptr<Operand>& target);
 
         bool has_effect(std::shared_ptr<Operand>) override;
 
