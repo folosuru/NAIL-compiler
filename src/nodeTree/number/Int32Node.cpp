@@ -6,7 +6,7 @@ namespace NAIL_cl {
         if (auto current_tok = list->getCurrent(); current_tok->getType() == Token::TokenType::number) {
             std::shared_ptr<Token::NumberToken> token = std::reinterpret_pointer_cast<Token::NumberToken>(current_tok);
             list->getCurrentPos()++;
-            return std::make_shared<Int32Node>(token->value);
+            return std::make_shared<Int32Node>(static_cast<std::int32_t>(token->value));
         }
         return nullptr;
     }
