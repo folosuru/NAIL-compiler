@@ -9,9 +9,9 @@ namespace NAIL_cl {
 
     class IdentifyNode : public Node_parent {
     public:
-        explicit IdentifyNode(std::string text) : str(std::move(text)) {}
+        explicit IdentifyNode(std::shared_ptr<Scope> scope, std::string text);
 
-        static std::shared_ptr<Node_parent> consume(const std::shared_ptr<TokenList>& list);
+        static std::shared_ptr<Node_parent> consume(std::shared_ptr<Scope>, const std::shared_ptr<TokenList>& list);
 
         void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>> &result) override;
     private:

@@ -10,13 +10,13 @@ namespace NAIL_cl {
 
     class Int32Node : public Node_parent {
     public:
-        explicit Int32Node(std::int32_t value) : value(value) {};
+        explicit Int32Node(std::shared_ptr<Scope>, std::int32_t value);;
 
         ~Int32Node() override = default;
 
         void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>> &result) override;
 
-        static std::shared_ptr<Node_parent> consume(const std::shared_ptr<TokenList>& list);
+        static std::shared_ptr<Node_parent> consume(std::shared_ptr<Scope>, const std::shared_ptr<TokenList>& list);
 
     private:
         std::int32_t value;

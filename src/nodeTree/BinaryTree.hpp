@@ -6,12 +6,11 @@ namespace NAIL_cl {
 
     class BinaryTree : public Node_parent {
     public:
-        explicit BinaryTree(NodeType left, NodeType right)
-            : Node_parent(), left(std::move(left)), right(std::move(right)) {};
+        explicit BinaryTree(std::shared_ptr<Scope> scope, NodeType left, NodeType right);;
 
         template<class T>
-        static NodeType create(NodeType left, NodeType right) {
-            return std::shared_ptr<Node_parent>(new T(left, right));
+        static NodeType create(std::shared_ptr<Scope> scope, NodeType left, NodeType right) {
+            return std::shared_ptr<Node_parent>(new T(scope, left, right));
         }
     protected:
         NodeType left, right;

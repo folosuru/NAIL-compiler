@@ -5,14 +5,19 @@
 #include <backend/assembly/instruction/Instruction.hpp>
 namespace NAIL_cl {
 
+    class Scope;
 
     class Node_parent {
     public:
 
-         virtual ~Node_parent() = default;
+        Node_parent(std::shared_ptr<Scope>);
+        Node_parent() = delete;
 
-         virtual void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>>& result) {  };
+        virtual ~Node_parent() = default;
 
+        virtual void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>>& result) {  };
+    protected:
+        std::shared_ptr<Scope> scope;
     };
     using NodeType = std::shared_ptr<Node_parent>;
 

@@ -9,11 +9,16 @@ namespace NAIL_cl {
     class Scope;
     class IdentifyNode;
     class Scope {
+    public:
         explicit Scope(std::weak_ptr<Scope> parent = {}) : parent(std::move(parent)) {
 
         }
 
         //void resolve_scope();
+
+    protected:
+        [[nodiscard]]
+        std::weak_ptr<Scope> getParent() const noexcept;
 
     private:
         std::weak_ptr<Scope> parent;
