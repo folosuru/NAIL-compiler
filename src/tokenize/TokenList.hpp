@@ -27,7 +27,7 @@ namespace NAIL_cl {
             return getToken(getCurrentPos());
         }
 
-        bool current_is(const std::string&);
+        bool consume_current(const std::string& target);
         bool current_is(Token::TokenType);
 
     private:

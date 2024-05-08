@@ -14,6 +14,9 @@ namespace NAIL_cl::Token {
         if (text == "for") {
             return std::make_shared<PreservedKeyword>(text, line, pos, PreservedKeyword::word_type::for_t);
         }
+        if (text == "var") {
+            return std::make_shared<PreservedKeyword>(text, line, pos, PreservedKeyword::word_type::var);
+        }
         return nullptr;
     }
 

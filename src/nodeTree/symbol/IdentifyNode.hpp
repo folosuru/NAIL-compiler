@@ -2,7 +2,7 @@
 #define NAIL_CL_IDENTIFYNODE_HPP
 #include <nodeTree/Node.hpp>
 #include <tokenize/TokenList.hpp>
-#include <Symbol/IdentifySymbol.hpp>
+#include <Symbol/ObjectBase.hpp>
 #include <utility>
 
 namespace NAIL_cl {
@@ -16,7 +16,7 @@ namespace NAIL_cl {
         void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>> &result) override;
     private:
         std::string str;
-        std::shared_ptr<IdentifySymbol> symbol;
+        std::shared_ptr<ObjectBase> symbol;
     };
 
 } // NAIL_cl

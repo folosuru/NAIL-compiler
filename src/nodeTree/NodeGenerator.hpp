@@ -8,26 +8,26 @@ namespace NAIL_cl {
 }
 namespace NAIL_cl::Node {
     // [value] + ( "(" + [assign] + ")" )?
-    NodeType function_call(const std::shared_ptr<TokenList>&, std::shared_ptr<Scope>);
+    NodeType function_call(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
     // ( [value] ( + "." + [function_call] )*?  | "(" + [assign] + ")" )
-    NodeType primary(const std::shared_ptr<TokenList>&, std::shared_ptr<Scope>);
+    NodeType primary(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
     // ("+" | "-" )? + [primary]
-    NodeType unary(const std::shared_ptr<TokenList>&, std::shared_ptr<Scope>);
+    NodeType unary(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
     // [unary] ( ( "*" |  "/" ) + [unary] )*?
-    NodeType mlu(const std::shared_ptr<TokenList>&, std::shared_ptr<Scope>);
+    NodeType mlu(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
     // [mlu] ( ( "+" | "-" ) [mlu] )*?
-    NodeType add(const std::shared_ptr<TokenList>&, std::shared_ptr<Scope>);
+    NodeType add(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
     // [add] ( ( "==" | ">=" | "<=" | ">" | "<" ) + [add] )* ?
 
     // [] = [assign | add]
-    NodeType assign(const std::shared_ptr<TokenList>&, std::shared_ptr<Scope>);
+    NodeType assign(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
-    // [assign] ;
+    // ([assign] | "var" + [identify] ) ;
     NodeType statement(const std::shared_ptr<TokenList>&, std::shared_ptr<Scope>);
 
     NodeType generate(const std::shared_ptr<TokenList>&);

@@ -1,10 +1,10 @@
 #ifndef NAIL_CL_LOCALVARIABLE_HPP
 #define NAIL_CL_LOCALVARIABLE_HPP
-#include <Symbol/IdentifySymbol.hpp>
+#include <Symbol/ObjectBase.hpp>
 #include <cstdint>
 namespace NAIL_cl {
 
-    class LocalVariable : public IdentifySymbol {
+    class LocalVariable : public ObjectBase {
     public:
 
     private:

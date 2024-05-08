@@ -1,20 +1,19 @@
-#ifndef NAIL_CL_IDENTIFYSYMBOL_HPP
-#define NAIL_CL_IDENTIFYSYMBOL_HPP
+#ifndef NAIL_CL_OBJECTBASE_HPP
+#define NAIL_CL_OBJECTBASE_HPP
 #include <string_view>
 #include <string>
 namespace NAIL_cl {
 
-    class IdentifySymbol {
+    class ObjectBase {
     public:
         [[nodiscard]]
         const std::string& getName() const;
 
-        explicit IdentifySymbol(std::string);
+        explicit ObjectBase(std::string);
     private:
         std::string name;
-
     };
 
 } // NAIL_cl
 
-#endif //NAIL_CL_IDENTIFYSYMBOL_HPP
+#endif //NAIL_CL_OBJECTBASE_HPP

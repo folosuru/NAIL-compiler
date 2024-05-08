@@ -3,7 +3,7 @@
 #include <memory>
 #include <utility>
 #include <unordered_map>
-#include <Symbol/IdentifySymbol.hpp>
+#include <Symbol/ObjectBase.hpp>
 #include <vector>
 namespace NAIL_cl {
     class Scope;
@@ -14,18 +14,20 @@ namespace NAIL_cl {
 
         }
 
-        //void resolve_scope();
+        // あくまでスコープを解決する = only call in resolve "::"
+        // std::shared_ptr<Scope> resolve_scope(std::string );
+
 
     protected:
         [[nodiscard]]
         std::weak_ptr<Scope> getParent() const noexcept;
 
+        std::unordered_map<std::string, std::shared_ptr<ObjectBase>> symbol;
+
+        std::vector<std::shared_ptr<IdentifyNode>> child_node;
     private:
         std::weak_ptr<Scope> parent;
 
-        std::unordered_map<std::string, std::shared_ptr<IdentifySymbol>> symbol;
-
-        std::vector<std::shared_ptr<IdentifyNode>> child_node;
     };
 }
 

@@ -64,7 +64,7 @@ namespace NAIL_cl {
         return token_list.at(pos);
     }
 
-    bool TokenList::current_is(const std::string& target) {
+    bool TokenList::consume_current(const std::string& target) {
         auto current = getCurrent();
         if (current) {
             if (current->getString() == target) {

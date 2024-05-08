@@ -10,7 +10,7 @@ namespace NAIL_cl::Token {
     public:
         enum class word_type {
             for_t,
-
+            var,
         };
 
         explicit PreservedKeyword(std::string_view name, std::size_t line, std::int64_t pos, word_type type);
