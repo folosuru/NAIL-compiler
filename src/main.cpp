@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
         std::shared_ptr<NAIL_cl::TokenList> token = std::make_shared<NAIL_cl::TokenList>(text);
         token->print();
         std::list<std::shared_ptr<NAIL_cl::asm_obj::instruction>> result;
-        NAIL_cl::Node::generate(token)->addAssembly(result);
+        auto node = NAIL_cl::Node::generate(token);
 
         std::ofstream result_file("test/out.s");
         result_file << ".intel_syntax noprefix\n"

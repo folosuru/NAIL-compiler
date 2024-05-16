@@ -3,12 +3,16 @@
 #include <error/ErrorPrinter.hpp>
 #include <Symbol/scope/GlobalScope.hpp>
 #include <utility>
+#include <iostream>
 namespace NAIL_cl::Node {
     NodeType identify(const std::shared_ptr<TokenList>& list, const std::shared_ptr<Scope>& scope) {
         if (auto number = Int32Node::consume(scope, list); number != nullptr) {
             return number;
         }
+        std::cout << list->getCurrent()->getString() << ";\n";
         if (auto identify = IdentifyNode::consume(scope, list); identify != nullptr) {
+
+            std::cout << list->getCurrent()->getString() << ";\n";
             return identify;
         }
         return nullptr;
@@ -23,7 +27,7 @@ namespace NAIL_cl::Node {
             return left;
         }
         if (!list->consume_current(")")) {
-            ErrorPrinter::print(list, list->getCurrent(), "unexpected token: except )", ")");
+            ErrorPrinter::print(list, list->getCurrent(), "unexpected token in function call: except )", ")");
         }
         return left;  //
     }
@@ -45,7 +49,7 @@ namespace NAIL_cl::Node {
 
         while (true) {
             if (list->consume_current(".")) {
-                result = BinaryTree::create<MemberAccessNode>(scope, result, function_call(list, scope));
+                result = BinaryTree::create(BinaryTree::Type::member_access, scope, result, function_call(list, scope));
                 continue;
             }
             return result;
@@ -68,11 +72,11 @@ namespace NAIL_cl::Node {
         NodeType left = unary(list, scope);
         while (true) {
             if (list->consume_current("*")) {
-                left = BinaryTree::create<MluNode>(scope, left, unary(list, scope));
+                left = BinaryTree::create(BinaryTree::Type::mlu, scope, left, unary(list, scope));
                 continue;
             }
             if (list->consume_current("/")) {
-                left = BinaryTree::create<DivNode>(scope, left, unary(list, scope));
+                left = BinaryTree::create(BinaryTree::Type::div, scope, left, unary(list, scope));
                 continue;
             }
             return left;
@@ -83,11 +87,11 @@ namespace NAIL_cl::Node {
         NodeType left = mlu(list, scope);
         while (true) {
             if (list->consume_current("+")) {
-                left = BinaryTree::create<PlusNode>(scope, left, mlu(list, scope));
+                left = BinaryTree::create(BinaryTree::Type::plus ,scope, left, mlu(list, scope));
                 continue;
             }
             if (list->consume_current("-")) {
-                left = BinaryTree::create<SubNode>(scope, left, mlu(list, scope));
+                left = BinaryTree::create(BinaryTree::Type::minus, scope, left, mlu(list, scope));
                 continue;
             }
             return left;
@@ -95,19 +99,23 @@ namespace NAIL_cl::Node {
     }
 
     NodeType assign(const std::shared_ptr<TokenList>& token, const std::shared_ptr<Scope>& scope) {
-        if (token->consume_current("var")) {
-            if (!token->current_is(Token::TokenType::identify)) {
-                // TODO: 全部実装する
-            }
+        auto left = add(token, scope);
+        if (token->consume_current("=")) {
+            return  BinaryTree::create(BinaryTree::Type::assign, scope, left, assign(token, scope));
         }
-        auto result = add(token, scope);
-        if (token->consume_current(";")) {
-            return result;
+        return left;
+    }
+
+    NodeType statement(const std::shared_ptr<TokenList>& token, std::shared_ptr<Scope> scope) {
+        auto stm = assign(token, scope);
+        if (!token->consume_current(";")) {
+            ErrorPrinter::print(token, token->getCurrent(), "Need ; at end of statement", ";");
         }
+        return stm;
     }
 
     NodeType generate(const std::shared_ptr<TokenList>& list ) {
-        return add(list, std::make_shared<GlobalScope>());
+        return statement(list, std::make_shared<GlobalScope>());
     }
 
 }

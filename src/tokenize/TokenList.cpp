@@ -6,6 +6,7 @@
 #include <tokenize/token/IdentifyToken.hpp>
 #include <tokenize/token/PreservedSymbol.hpp>
 #include <tokenize/token/NumberToken.hpp>
+#include <tokenize/token/EofToken.hpp>
 namespace NAIL_cl {
     using Token_ptr = std::shared_ptr<Token::Token>;
     namespace {
@@ -36,6 +37,8 @@ namespace NAIL_cl {
                 exit(0);
             }
         }
+
+        push_token(std::make_shared<Token::EofToken>());
     }
 
     bool TokenList::push_token(const Token_ptr& ptr) {

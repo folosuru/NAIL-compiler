@@ -13,10 +13,15 @@ namespace NAIL_cl {
         explicit Scope(std::weak_ptr<Scope> parent = {}) : parent(std::move(parent)) {
 
         }
-
+//
+//        virtual void* createVariable() = 0;
+//
+//        virtual void* createFunction() = 0;
+//
         // あくまでスコープを解決する = only call in resolve "::"
         // std::shared_ptr<Scope> resolve_scope(std::string );
 
+        void* resolve_object(const std::string&);
 
     protected:
         [[nodiscard]]

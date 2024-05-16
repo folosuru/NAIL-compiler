@@ -21,7 +21,7 @@ namespace NAIL_cl::Token {
 
             equal,
             small_bracket_open,
-            small_breacket_close
+            small_breacket_close,
         };
 
         explicit PreservedSymbol(std::string_view name, std::size_t line, std::int64_t pos, Symbol_type type);

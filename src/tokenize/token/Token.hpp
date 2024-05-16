@@ -11,7 +11,8 @@ namespace NAIL_cl::Token {
         Preserved_symbol,
         identify,
         number,
-        text
+        text,
+        eof
     };
 
     class Token {

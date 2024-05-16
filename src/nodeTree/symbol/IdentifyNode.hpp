@@ -13,7 +13,6 @@ namespace NAIL_cl {
 
         static std::shared_ptr<Node_parent> consume(std::shared_ptr<Scope>, const std::shared_ptr<TokenList>& list);
 
-        void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>> &result) override;
     private:
         std::string str;
         std::shared_ptr<ObjectBase> symbol;

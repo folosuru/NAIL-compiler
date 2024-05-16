@@ -32,5 +32,5 @@ namespace NAIL_cl::Node {
 
     NodeType generate(const std::shared_ptr<TokenList>&);
 
-}  // NAIL_cl
+}  // NAIL_cl::Node
 #endif //NAIL_CL_NODEGENERATOR_HPP

@@ -14,9 +14,5 @@ namespace NAIL_cl {
         return nullptr;
     }
 
-    void Int32Node::addAssembly(std::list<std::shared_ptr<asm_obj::instruction>> &result) {
-        result.push_back(std::make_shared<asm_obj::push>(std::make_shared<asm_obj::Number>(value)));
-    }
-
     Int32Node::Int32Node(std::shared_ptr<Scope> scope, std::int32_t value) : Node_parent(scope), value(value) {}
 } // NAIL_cl

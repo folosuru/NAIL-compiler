@@ -6,11 +6,22 @@ namespace NAIL_cl {
 
     class BinaryTree : public Node_parent {
     public:
-        explicit BinaryTree(std::shared_ptr<Scope> scope, NodeType left, NodeType right);;
+        enum class Type {
+            plus,
+            minus,
+            mlu,
+            div,
 
-        template<class T>
-        static NodeType create(std::shared_ptr<Scope> scope, NodeType left, NodeType right) {
-            return std::shared_ptr<Node_parent>(new T(scope, left, right));
+            member_access,
+            assign
+        };
+
+        const Type type;
+
+        explicit BinaryTree(Type type, std::shared_ptr<Scope> scope, NodeType left, NodeType right);;
+
+        static NodeType create(Type type, std::shared_ptr<Scope> scope, NodeType left, NodeType right) {
+            return std::make_shared<BinaryTree>(type, scope, left, right);
         }
     protected:
         NodeType left, right;

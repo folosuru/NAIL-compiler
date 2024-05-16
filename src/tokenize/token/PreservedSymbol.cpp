@@ -51,9 +51,14 @@ namespace NAIL_cl::Token {
                 if (text == "/") {
                     return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::div);
                 }
-
                 if (text == ".") {
                     return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::period);
+                }
+                if (text == "=") {
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::assign);
+                }
+                if (text == ";") {
+                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::semi_coron);
                 }
             }
 

@@ -14,6 +14,7 @@ namespace NAIL_cl {
         std::string name;
     };
 
+
 } // NAIL_cl
 
 #endif //NAIL_CL_OBJECTBASE_HPP

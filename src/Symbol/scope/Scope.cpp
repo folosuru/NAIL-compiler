@@ -6,5 +6,9 @@ namespace NAIL_cl {
         return parent;
     }
 
+    void* Scope::resolve_object(const std::string& name) {
+
+    }
+
 }
 

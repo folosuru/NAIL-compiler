@@ -15,7 +15,6 @@ namespace NAIL_cl {
 
         virtual ~Node_parent() = default;
 
-        virtual void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>>& result) {  };
     protected:
         std::shared_ptr<Scope> scope;
     };

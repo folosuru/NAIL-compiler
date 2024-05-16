@@ -14,8 +14,6 @@ namespace NAIL_cl {
 
         ~Int32Node() override = default;
 
-        void addAssembly(std::list<std::shared_ptr<asm_obj::instruction>> &result) override;
-
         static std::shared_ptr<Node_parent> consume(std::shared_ptr<Scope>, const std::shared_ptr<TokenList>& list);
 
     private:
