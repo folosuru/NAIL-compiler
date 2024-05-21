@@ -1,9 +1,10 @@
-#ifndef NAIL_CL_TYPE_HPP
-#define NAIL_CL_TYPE_HPP
+#ifndef NAIL_CL_VARTYPE_HPP
+#define NAIL_CL_VARTYPE_HPP
 #include <string>
+#include <utility>
 namespace NAIL_cl {
 
-    class Type {
+    class VarType {
     public:
         enum class Type_type {
             number,
@@ -11,6 +12,10 @@ namespace NAIL_cl {
             array,
             unknown
         };
+
+        virtual ~VarType() = default;
+        explicit VarType(std::string s, Type_type t) : name(std::move(s)), type(t) {}
+
 
         [[nodiscard]]
         const std::string& getName() const noexcept {
@@ -29,4 +34,4 @@ namespace NAIL_cl {
 
 } // NAIL_cl
 
-#endif //NAIL_CL_TYPE_HPP
+#endif //NAIL_CL_VARTYPE_HPP
