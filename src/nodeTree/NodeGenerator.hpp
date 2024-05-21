@@ -28,7 +28,7 @@ namespace NAIL_cl::Node {
     NodeType assign(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
     // ([assign] | "var" + [identify] ) ;
-    NodeType statement(const std::shared_ptr<TokenList>&, std::shared_ptr<Scope>);
+    NodeType statement(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
     NodeType generate(const std::shared_ptr<TokenList>&);
 

@@ -2,7 +2,6 @@
 #include <nodeTree/NodeIncludeList.hpp>
 #include <error/ErrorPrinter.hpp>
 #include <Symbol/scope/GlobalScope.hpp>
-#include <utility>
 #include "nodeTree/syntax/BlockNode.hpp"
 
 namespace NAIL_cl::Node {
@@ -104,7 +103,7 @@ namespace NAIL_cl::Node {
         return left;
     }
 
-    NodeType statement(const std::shared_ptr<TokenList>& token, std::shared_ptr<Scope> scope) {
+    NodeType statement(const std::shared_ptr<TokenList>& token, const std::shared_ptr<Scope>& scope) {
         auto stm = assign(token, scope);
         if (!token->consume_current(";")) {
             ErrorPrinter::print(token, token->getCurrent(), "Need ; at end of statement", ";");

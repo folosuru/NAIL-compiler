@@ -2,6 +2,7 @@
 #include <backend/assembly/instruction/Push.hpp>
 #include <backend/assembly/operand/Number.hpp>
 #include <Symbol/scope/Scope.hpp>
+#include <utility>
 
 namespace NAIL_cl {
     std::shared_ptr<Node_parent> Int32Node::consume(std::shared_ptr<Scope> scope,
@@ -14,5 +15,5 @@ namespace NAIL_cl {
         return nullptr;
     }
 
-    Int32Node::Int32Node(std::shared_ptr<Scope> scope, std::int32_t value) : Node_parent(scope), value(value) {}
+    Int32Node::Int32Node(std::shared_ptr<Scope> scope, std::int32_t value) : Node_parent(std::move(scope)), value(value) {}
 } // NAIL_cl

@@ -8,7 +8,7 @@ namespace NAIL_cl {
     public:
         BlockNode(std::shared_ptr<Scope>);
         ~BlockNode() override = default;
-        void addChild(NodeType);
+        void addChild(const NodeType&);
     private:
         std::vector<NodeType> child;
     };

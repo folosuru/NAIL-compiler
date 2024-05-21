@@ -10,7 +10,7 @@ namespace NAIL_cl {
     class Node_parent {
     public:
 
-        Node_parent(std::shared_ptr<Scope>);
+        explicit Node_parent(std::shared_ptr<Scope>);
         Node_parent() = delete;
 
         virtual ~Node_parent() = default;
