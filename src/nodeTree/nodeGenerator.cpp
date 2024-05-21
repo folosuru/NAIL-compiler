@@ -3,16 +3,14 @@
 #include <error/ErrorPrinter.hpp>
 #include <Symbol/scope/GlobalScope.hpp>
 #include <utility>
-#include <iostream>
+#include "nodeTree/syntax/BlockNode.hpp"
+
 namespace NAIL_cl::Node {
     NodeType identify(const std::shared_ptr<TokenList>& list, const std::shared_ptr<Scope>& scope) {
         if (auto number = Int32Node::consume(scope, list); number != nullptr) {
             return number;
         }
-        std::cout << list->getCurrent()->getString() << ";\n";
         if (auto identify = IdentifyNode::consume(scope, list); identify != nullptr) {
-
-            std::cout << list->getCurrent()->getString() << ";\n";
             return identify;
         }
         return nullptr;
@@ -115,7 +113,11 @@ namespace NAIL_cl::Node {
     }
 
     NodeType generate(const std::shared_ptr<TokenList>& list ) {
-        return statement(list, std::make_shared<GlobalScope>());
+        std::shared_ptr<BlockNode> node = std::make_shared<BlockNode>(std::make_shared<GlobalScope>());
+        while (!list->current_is(Token::TokenType::eof)) {
+            node->addChild(statement(list, std::make_shared<GlobalScope>()));
+        }
+        return node;
     }
 
 }
