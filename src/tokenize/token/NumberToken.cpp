@@ -1,12 +1,12 @@
 #include "NumberToken.hpp"
 
 namespace NAIL_cl::Token {
-    NumberToken::NumberToken(std::string_view name, std::size_t line, std::int64_t pos, std::size_t number)
-    : Token(name, line, pos), value(number) {
+    NumberToken::NumberToken(std::string_view name, std::size_t line, std::int64_t pos, const TokenList& list, std::size_t number)
+    : Token(name, line, pos, list), value(number) {
 
     }
 
-    Token_ptr NumberToken::consume(const std::string& str, const std::size_t& line, std::int64_t &pos) {
+    Token_ptr NumberToken::consume(const std::string& str, const std::size_t& line, std::int64_t &pos, const TokenList& list) {
         if (str[pos] >= '0' && str[pos] <= '9') {
             std::int64_t start = pos;
             std::size_t val = 0;
@@ -16,6 +16,7 @@ namespace NAIL_cl::Token {
                     std::string_view(str.begin() + start, str.begin() + pos),
                     line,
                     start,
+                    list,
                     value);
         }
         return nullptr;

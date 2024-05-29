@@ -6,8 +6,14 @@
 
 namespace NAIL_cl::ErrorPrinter {
     [[noreturn]]
-    void print(const std::shared_ptr<TokenList>&,
+    void print(const TokenList&,
                const std::shared_ptr<Token::Token>&,
+               const std::string& message,
+               std::optional<std::string_view> suggest = std::nullopt);
+
+    [[noreturn]]
+    void print(const std::shared_ptr<TokenList>& tokenList,
+               const std::shared_ptr<Token::Token>& tok,
                const std::string& message,
                std::optional<std::string_view> suggest = std::nullopt);
 

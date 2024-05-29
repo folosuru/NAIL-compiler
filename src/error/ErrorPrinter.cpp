@@ -4,7 +4,7 @@
 #include <cmath>
 
 namespace NAIL_cl::ErrorPrinter {
-    void print(const std::shared_ptr<TokenList>& list,
+    void print(const TokenList& list,
                const std::shared_ptr<Token::Token>& token,
                const std::string& message,
                std::optional<std::string_view> suggest) {
@@ -14,12 +14,12 @@ namespace NAIL_cl::ErrorPrinter {
         std::string target_line;
         std::size_t pos;
         if (token->getType() == Token::TokenType::eof) {
-            target_line = *list->source_text.rbegin();
+            target_line = *list.source_text.rbegin();
             line = 0;
             pos = target_line.size();
         } else {
             line = token->line;
-            target_line = list->source_text.at(line - 1);
+            target_line = list.source_text.at(line - 1);
             pos = token->pos;
         }
 
@@ -32,6 +32,11 @@ namespace NAIL_cl::ErrorPrinter {
             std::cout << std::setw( pos+1 + 4 + 4 + static_cast<int>(std::log10(pos+1)) +1) << suggest.value() << "\n";
         }
         exit(0);
+    }
+
+    void print(const std::shared_ptr<TokenList> &tokenList, const std::shared_ptr<Token::Token> &tok,
+               const std::string &message, std::optional<std::string_view> suggest) {
+        print(*tokenList, tok, message, suggest);
     }
 
 }

@@ -7,7 +7,7 @@
 namespace NAIL_cl::Token {
         class EofToken : public Token {
         public:
-            EofToken();
+            EofToken(const TokenList&);
 
             ~EofToken() override = default;
 

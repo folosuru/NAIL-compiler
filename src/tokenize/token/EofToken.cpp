@@ -1,8 +1,9 @@
 #include "EofToken.hpp"
+#include "tokenize/TokenList.hpp"
 
 namespace NAIL_cl {
     namespace Token {
-        EofToken::EofToken() : Token("", 0, 0) {
+        EofToken::EofToken(const TokenList& list) : Token("", 0, 0, list) {
 
         }
 

@@ -1,9 +1,10 @@
+#include <optional>
 #include "PreservedSymbol.hpp"
-
+#include <tokenize/token/IdentifyToken.hpp>
 
 namespace NAIL_cl::Token {
-    PreservedSymbol::PreservedSymbol(std::string_view name, std::size_t line, std::int64_t pos, Symbol_type type)
-      : Token(name, line, pos) , type(type) {}
+    PreservedSymbol::PreservedSymbol(std::string_view name, std::size_t line, std::int64_t pos, const TokenList& list, Symbol_type type)
+      : Token(name, line, pos, list) , type(type) {}
 
 
     TokenType PreservedSymbol::getType() const {
@@ -12,53 +13,82 @@ namespace NAIL_cl::Token {
 
 
 
-    Token_ptr PreservedSymbol::consume(const std::string& str, const std::size_t &line, std::int64_t &pos) {
+    Token_ptr PreservedSymbol::consume(const std::string& str, const std::size_t &line, std::int64_t &pos, const TokenList& list) {
         std::int64_t start = pos;
-
+        std::optional<Symbol_type> result = std::nullopt;
+        std::string_view text;
         // fall through
         switch (str.length() - pos) {
             default:
 
+            case 3: {
+                pos = start + 3;
+                text = std::string_view(str.begin() + start, str.begin() + pos);
+
+                // このn文字で終わりか、n+1文字目が変数名に使える名前でない -> このトークンは3文字である
+                if (str.length() <= pos + 1 || !IdentifyToken::is_identify_char(str.at(pos+1))) {
+                    if (text == "for") {
+                        result = Symbol_type::kw_for;
+                        break;
+                    }
+                    if (text == "var") {
+                        result = Symbol_type::kw_var;
+                        break;
+                    }
+                }
+            }
+
             case 2: {
                 pos = start + 2;
-                std::string_view text = std::string_view(str.begin() + start, str.begin() + pos);
-                if (text == "==") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::equal);
+                text = std::string_view(str.begin() + start, str.begin() + pos);
+                if (text == "->") {
+                    result = Symbol_type::right_arrow;
+                    break;
                 }
             }
 
             case 1: {
                 pos = start + 1;
-                std::string_view text = std::string_view(str.begin() + start, str.begin() + pos);
+                text = std::string_view(str.begin() + start, str.begin() + pos);
                 if (text == ",") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::comma);
+                    result = PreservedSymbol::Symbol_type::comma;
+                    break;
                 }
                 if (text == "+") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::plus);
+                    result = PreservedSymbol::Symbol_type::plus;
+                    break;
                 }
                 if (text == "-") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::minus);
+                    result = PreservedSymbol::Symbol_type::minus;
+                    break;
                 }
                 if (text == "(") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::small_bracket_open);
+                    result = PreservedSymbol::Symbol_type::small_bracket_open;
+                    break;
                 }
                 if (text == ")") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::small_breacket_close);
+                    result = PreservedSymbol::Symbol_type::small_bracket_close;
+                    break;
                 }
                 if (text == "*") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::mlu);
+                    result = PreservedSymbol::Symbol_type::mlu;
+                    break;
                 }
                 if (text == "/") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::div);
+                    result = PreservedSymbol::Symbol_type::div;
+                    break;
                 }
                 if (text == ".") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::period);
+                    result = PreservedSymbol::Symbol_type::period;
+                    break;
                 }
                 if (text == "=") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::assign);
+                    result = PreservedSymbol::Symbol_type::equal;
+                    break;
                 }
                 if (text == ";") {
-                    return std::make_shared<PreservedSymbol>(text, line, start, PreservedSymbol::Symbol_type::semi_coron);
+                    result = PreservedSymbol::Symbol_type::semi_coron;
+                    break;
                 }
             }
 
@@ -66,6 +96,7 @@ namespace NAIL_cl::Token {
                 pos = start;
                 return nullptr;
         }
+        return std::make_shared<PreservedSymbol>(text, line, start, list, result.value());
     }
 
 } // NAIL_cl::Token

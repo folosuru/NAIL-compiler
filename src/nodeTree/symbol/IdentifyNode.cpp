@@ -4,17 +4,21 @@
 #include <utility>
 
 namespace NAIL_cl {
-    std::shared_ptr<Node_parent> IdentifyNode::consume(std::shared_ptr<Scope> scope,
+    std::shared_ptr<Node_parent> IdentifyNode::consume(const std::shared_ptr<Scope> &scope,
                                                        const std::shared_ptr<TokenList> &list) {
         if (list->current_is(Token::TokenType::identify)) {
             auto token = list->getCurrent();
             //list->getCurrentPos()++;
-            return std::make_shared<IdentifyNode>(scope, std::string(token->getString()));
+            return std::make_shared<IdentifyNode>(scope, std::string(token->getString()), token);
         }
         return nullptr;
     }
 
 
-    IdentifyNode::IdentifyNode(std::shared_ptr<Scope> scope, std::string text)
-    : Node_parent(std::move(scope)), str(std::move(text)) {}
+    IdentifyNode::IdentifyNode(const std::shared_ptr<Scope>& scope, std::string text, Token::Token_ptr token)
+    : Node_parent(scope, std::move(token)), str(std::move(text)) {}
+
+    std::shared_ptr<VarTypeBase> IdentifyNode::getVarType() {
+        return std::shared_ptr<VarTypeBase>();
+    }
 }

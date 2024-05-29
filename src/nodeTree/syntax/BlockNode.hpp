@@ -6,9 +6,10 @@ namespace NAIL_cl {
 
     class BlockNode : public Node_parent {
     public:
-        BlockNode(std::shared_ptr<Scope>);
+        BlockNode(std::shared_ptr<Scope>, Token::Token_ptr );
         ~BlockNode() override = default;
         void addChild(const NodeType&);
+        std::shared_ptr<VarTypeBase> getVarType() override;
     private:
         std::vector<NodeType> child;
     };

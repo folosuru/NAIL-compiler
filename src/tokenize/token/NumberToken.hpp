@@ -6,7 +6,11 @@ namespace NAIL_cl::Token {
 
     class NumberToken : public Token{
     public:
-        explicit NumberToken(std::string_view name, std::size_t line, std::int64_t pos, std::size_t number);
+        NumberToken(std::string_view name,
+                             std::size_t line,
+                             std::int64_t pos,
+                             const TokenList& list,
+                             std::size_t number);
 
         const std::size_t value;
 
@@ -15,7 +19,7 @@ namespace NAIL_cl::Token {
         [[nodiscard]]
         TokenType getType() const override;
 
-        static Token_ptr consume(const std::string& str, const std::size_t& line, std::int64_t &pos);
+        static Token_ptr consume(const std::string& str, const std::size_t& line, std::int64_t &pos, const TokenList& list);
     private:
     };
 

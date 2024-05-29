@@ -18,13 +18,17 @@ namespace NAIL_cl {
 
         const Type type;
 
-        explicit BinaryTree(Type type, std::shared_ptr<Scope> scope, NodeType left, NodeType right);;
+        const NodeType left;
+        const NodeType right;
 
-        static NodeType create(Type type, const std::shared_ptr<Scope>& scope, const NodeType& left, const NodeType& right) {
-            return std::make_shared<BinaryTree>(type, scope, left, right);
+        explicit BinaryTree(Type type, std::shared_ptr<Scope> scope, NodeType left, NodeType right, Token::Token_ptr );
+
+        static NodeType create(Type type, const std::shared_ptr<Scope>& scope, const NodeType& left, const NodeType& right, const Token::Token_ptr& token) {
+            return std::make_shared<BinaryTree>(type, scope, left, right, token);
         }
-    protected:
-        NodeType left, right;
+
+        std::shared_ptr<VarTypeBase> getVarType() override;
+
     };
 
 

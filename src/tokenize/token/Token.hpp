@@ -4,6 +4,10 @@
 #include <cstdint>
 #include <string_view>
 #include <string>
+#include <utility>
+namespace NAIL_cl {
+    class TokenList;
+}
 namespace NAIL_cl::Token {
 
     enum class TokenType {
@@ -14,14 +18,14 @@ namespace NAIL_cl::Token {
         text,
         eof
     };
-
     class Token {
     public:
         const std::size_t line;
         const std::int64_t pos;
+        const TokenList& list;
 
-        explicit Token(std::string_view view, std::size_t line, std::int64_t pos)
-         : text(view), line(line), pos(pos) {}
+        explicit Token(std::string_view view, std::size_t line, std::int64_t pos, const TokenList& list)
+         : text(view), line(line), pos(pos), list(list) {}
 
         [[nodiscard]]
         virtual TokenType getType() const = 0;

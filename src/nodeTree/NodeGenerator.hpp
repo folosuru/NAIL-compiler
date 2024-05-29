@@ -24,7 +24,7 @@ namespace NAIL_cl::Node {
 
     // [add] ( ( "==" | ">=" | "<=" | ">" | "<" ) + [add] )* ?
 
-    // [] = [assign | add]
+    // [assign | add] ( -> [add] )* ?
     NodeType assign(const std::shared_ptr<TokenList>&, const std::shared_ptr<Scope>&);
 
     // ([assign] | "var" + [identify] ) ;

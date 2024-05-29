@@ -10,12 +10,13 @@ namespace NAIL_cl {
 
     class Int32Node : public Node_parent {
     public:
-        explicit Int32Node(std::shared_ptr<Scope>, std::int32_t value);;
+        explicit Int32Node(std::shared_ptr<Scope>, std::int32_t value, Token::Token_ptr token);;
 
         ~Int32Node() override = default;
 
         static std::shared_ptr<Node_parent> consume(std::shared_ptr<Scope>, const std::shared_ptr<TokenList>& list);
 
+        std::shared_ptr<VarTypeBase> getVarType() override;
     private:
         std::int32_t value;
     };

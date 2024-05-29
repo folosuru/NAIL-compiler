@@ -4,27 +4,29 @@
 #include <tokenize/token/Token.hpp>
 
 namespace NAIL_cl::Token {
-
+    // include Operator and Keyword
     class PreservedSymbol : public Token{
     public:
         enum class Symbol_type {
-            plus,
-            minus,
-            comma,
-            mlu,
-            div,
-            semi_coron,
-            coron,
-            period,
+            plus,                 // +
+            minus,                // -
+            mlu,                  // *
+            div,                  // /
+            comma,                // ,
+            period,               // .
+            semi_coron,           // ;
+            coron,                // :
+            equal,                // =
+            small_bracket_open,   // (
+            small_bracket_close,  // )
+            right_arrow,          // ->
 
-            assign,
+            kw_for,               // for
+            kw_var                // var
 
-            equal,
-            small_bracket_open,
-            small_breacket_close,
         };
 
-        explicit PreservedSymbol(std::string_view name, std::size_t line, std::int64_t pos, Symbol_type type);
+        explicit PreservedSymbol(std::string_view name, std::size_t line, std::int64_t pos, const TokenList& list, Symbol_type type);
 
         ~PreservedSymbol() override = default;
 
@@ -36,7 +38,7 @@ namespace NAIL_cl::Token {
             return type;
         }
 
-        static Token_ptr consume(const std::string& str, const std::size_t &line, std::int64_t &pos);
+        static Token_ptr consume(const std::string& str, const std::size_t &line, std::int64_t &pos, const TokenList&);
 
     private:
         Symbol_type type;

@@ -9,15 +9,16 @@ namespace NAIL_cl::Token {
 
     class IdentifyToken : public Token {
     public:
-        explicit IdentifyToken(std::string_view name, std::size_t line, std::int64_t pos);
+        explicit IdentifyToken(std::string_view name, std::size_t line, std::int64_t pos, const TokenList&);
 
         ~IdentifyToken() override = default;
 
         [[nodiscard]]
         TokenType getType() const override;
 
-        static Token_ptr consume(const std::string& str, const std::size_t& line, std::int64_t &pos);
+        static Token_ptr consume(const std::string& str, const std::size_t& line, std::int64_t &pos, const TokenList&);
 
+        static bool is_identify_char(char);
     private:
     };
 

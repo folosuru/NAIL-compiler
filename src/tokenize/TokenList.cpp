@@ -9,10 +9,6 @@
 #include <tokenize/token/EofToken.hpp>
 namespace NAIL_cl {
     using Token_ptr = std::shared_ptr<Token::Token>;
-    namespace {
-
-
-    }
 
     TokenList::TokenList(const std::vector<std::string>& text) : source_text(text) {
         std::size_t line_cnt = 0;
@@ -24,13 +20,13 @@ namespace NAIL_cl {
                     current_pos_++;
                     continue;
                 }
-                if (push_token(Token::NumberToken::consume(line, line_cnt, current_pos_))) {
+                if (push_token(Token::NumberToken::consume(line, line_cnt, current_pos_, *this))) {
                     continue;
                 }
-                if (push_token(Token::IdentifyToken::consume(line, line_cnt, current_pos_))) {
+                if (push_token(Token::PreservedSymbol::consume(line, line_cnt, current_pos_, *this))) {
                     continue;
                 }
-                if (push_token(Token::PreservedSymbol::consume(line, line_cnt, current_pos_))) {
+                if (push_token(Token::IdentifyToken::consume(line, line_cnt, current_pos_, *this))) {
                     continue;
                 }
                 std::cout << "unknwon character:" << line[current_pos_]  << std::endl;
@@ -38,7 +34,7 @@ namespace NAIL_cl {
             }
         }
 
-        push_token(std::make_shared<Token::EofToken>());
+        push_token(std::make_shared<Token::EofToken>(*this));
     }
 
     bool TokenList::push_token(const Token_ptr& ptr) {
@@ -67,15 +63,15 @@ namespace NAIL_cl {
         return token_list.at(pos);
     }
 
-    bool TokenList::consume_current(const std::string& target) {
+    Token_ptr TokenList::consume_current(const std::string& target) {
         auto current = getCurrent();
         if (current) {
             if (current->getString() == target) {
                 current_pos++;
-                return true;
+                return current;
             }
         }
-        return false;
+        return nullptr;
     }
 
     bool TokenList::current_is(Token::TokenType type) {

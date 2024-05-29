@@ -31,8 +31,10 @@ namespace NAIL_cl::Node {
 
     NodeType primary(const std::shared_ptr<TokenList>& list, const std::shared_ptr<Scope>& scope) {
         NodeType result;
+
+        // bracket
         if (list->consume_current("(")) {
-            result = add(list, scope);
+            result = assign(list, scope);
             if (!list->consume_current(")")){
                 ErrorPrinter::print(list, list->getCurrent(), "unexpected token: except )", ")");
             }
@@ -45,8 +47,9 @@ namespace NAIL_cl::Node {
         }
 
         while (true) {
+            auto current = list->getCurrent();
             if (list->consume_current(".")) {
-                result = BinaryTree::create(BinaryTree::Type::member_access, scope, result, function_call(list, scope));
+                result = BinaryTree::create(BinaryTree::Type::member_access, scope, result, function_call(list, scope), current);
                 continue;
             }
             return result;
@@ -68,12 +71,12 @@ namespace NAIL_cl::Node {
     NodeType mlu(const std::shared_ptr<TokenList>& list, const std::shared_ptr<Scope>& scope) {
         NodeType left = unary(list, scope);
         while (true) {
-            if (list->consume_current("*")) {
-                left = BinaryTree::create(BinaryTree::Type::mlu, scope, left, unary(list, scope));
+            if (auto current = list->consume_current("*")) {
+                left = BinaryTree::create(BinaryTree::Type::mlu, scope, left, unary(list, scope), current);
                 continue;
             }
-            if (list->consume_current("/")) {
-                left = BinaryTree::create(BinaryTree::Type::div, scope, left, unary(list, scope));
+            if (auto current =  list->consume_current("/")) {
+                left = BinaryTree::create(BinaryTree::Type::div, scope, left, unary(list, scope), current);
                 continue;
             }
             return left;
@@ -83,12 +86,12 @@ namespace NAIL_cl::Node {
     NodeType add(const std::shared_ptr<TokenList>& list, const std::shared_ptr<Scope>& scope) {
         NodeType left = mlu(list, scope);
         while (true) {
-            if (list->consume_current("+")) {
-                left = BinaryTree::create(BinaryTree::Type::plus ,scope, left, mlu(list, scope));
+            if (auto current = list->consume_current("+")) {
+                left = BinaryTree::create(BinaryTree::Type::plus ,scope, left, mlu(list, scope), current);
                 continue;
             }
-            if (list->consume_current("-")) {
-                left = BinaryTree::create(BinaryTree::Type::minus, scope, left, mlu(list, scope));
+            if (auto current = list->consume_current("-")) {
+                left = BinaryTree::create(BinaryTree::Type::minus, scope, left, mlu(list, scope), current);
                 continue;
             }
             return left;
@@ -97,8 +100,8 @@ namespace NAIL_cl::Node {
 
     NodeType assign(const std::shared_ptr<TokenList>& token, const std::shared_ptr<Scope>& scope) {
         auto left = add(token, scope);
-        if (token->consume_current("=")) {
-            return  BinaryTree::create(BinaryTree::Type::assign, scope, left, assign(token, scope));
+        while (auto current = token->consume_current("->")) {
+            left = BinaryTree::create(BinaryTree::Type::assign, scope, left, assign(token, scope), current);
         }
         return left;
     }
@@ -112,7 +115,7 @@ namespace NAIL_cl::Node {
     }
 
     NodeType generate(const std::shared_ptr<TokenList>& list ) {
-        std::shared_ptr<BlockNode> node = std::make_shared<BlockNode>(std::make_shared<GlobalScope>());
+        std::shared_ptr<BlockNode> node = std::make_shared<BlockNode>(std::make_shared<GlobalScope>(), list->getCurrent());
         while (!list->current_is(Token::TokenType::eof)) {
             node->addChild(statement(list, std::make_shared<GlobalScope>()));
         }
