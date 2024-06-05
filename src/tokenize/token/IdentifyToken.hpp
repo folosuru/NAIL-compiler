@@ -9,6 +9,8 @@ namespace NAIL_cl::Token {
 
     class IdentifyToken : public Token {
     public:
+        constexpr static TokenType static_type = TokenType::identify;
+
         explicit IdentifyToken(std::string_view name, std::size_t line, std::int64_t pos, const TokenList&);
 
         ~IdentifyToken() override = default;

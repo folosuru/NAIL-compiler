@@ -7,6 +7,8 @@ namespace NAIL_cl::Token {
     // include Operator and Keyword
     class PreservedSymbol : public Token{
     public:
+        constexpr static TokenType static_type = TokenType::Preserved_symbol;
+
         enum class Symbol_type {
             plus,                 // +
             minus,                // -
@@ -39,7 +41,6 @@ namespace NAIL_cl::Token {
         }
 
         static Token_ptr consume(const std::string& str, const std::size_t &line, std::int64_t &pos, const TokenList&);
-
     private:
         Symbol_type type;
 

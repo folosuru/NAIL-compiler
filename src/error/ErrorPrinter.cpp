@@ -29,7 +29,7 @@ namespace NAIL_cl::ErrorPrinter {
         std::cout << std::setw( pos+1 + 4 + 4 + static_cast<int>(std::log10(pos+1))+1) << "^"
          <<  std::setfill('~') << std::setw(token->getString().size() - 1) << "" << std::setfill(' ') << "\n";
         if (suggest) {
-            std::cout << std::setw( pos+1 + 4 + 4 + static_cast<int>(std::log10(pos+1)) +1) << suggest.value() << "\n";
+            std::cout << std::setw( pos+1 + 4 + 4 + static_cast<int>(std::log10(pos+1)) - suggest.value().length()/2) <<"" << suggest.value() << "\n";
         }
         exit(0);
     }

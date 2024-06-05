@@ -47,12 +47,12 @@ namespace NAIL_cl {
 
     void TokenList::print() {
         for (const auto& i : token_list) {
-            std::cout << " \"" << i->getString() << "\", ";
+            std::cout << "<" << Token::Token::getTypeName(i->getType()) << " \"" << i->getString() << "\">, ";
         }
         std::cout << "\n";
     }
 
-    std::size_t& TokenList::getCurrentPos() {
+    const std::size_t& TokenList::getCurrentPos() const {
         return current_pos;
     }
 
@@ -78,10 +78,21 @@ namespace NAIL_cl {
         auto current = getCurrent();
         if (current) {
             if (current->getType() == type) {
-                current_pos++;
                 return true;
             }
         }
         return false;
+    }
+
+    void TokenList::seek_next() {
+        current_pos++;
+    }
+
+    Token_ptr TokenList::consume_current(Token::TokenType target) {
+        if (current_is(target)) {
+            seek_next();
+            return getToken(getCurrentPos() - 1);
+        }
+        return nullptr;
     }
 } // NAIL_cl

@@ -35,6 +35,8 @@ namespace NAIL_cl::Token {
             return text;
         }
 
+        static std::string_view getTypeName(TokenType);
+
         virtual ~Token() = default;
     private:
         std::string_view text;

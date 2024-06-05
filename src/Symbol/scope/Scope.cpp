@@ -6,8 +6,11 @@ namespace NAIL_cl {
         return parent;
     }
 
-    void* Scope::resolve_object(const std::string& name) {
-
+    std::shared_ptr<ObjectBase> Scope::resolve_object(const std::string& key) {
+        if (auto value = symbol.find(key); symbol.end() != value) {
+            return value->second;
+        }
+        return nullptr;
     }
 
 }

@@ -6,10 +6,8 @@
 namespace NAIL_cl {
     std::shared_ptr<Node_parent> IdentifyNode::consume(const std::shared_ptr<Scope> &scope,
                                                        const std::shared_ptr<TokenList> &list) {
-        if (list->current_is(Token::TokenType::identify)) {
-            auto token = list->getCurrent();
-            //list->getCurrentPos()++;
-            return std::make_shared<IdentifyNode>(scope, std::string(token->getString()), token);
+        if (auto current = list->consume_current(Token::TokenType::identify)) {
+            return std::make_shared<IdentifyNode>(scope, std::string(current->getString()), current);
         }
         return nullptr;
     }

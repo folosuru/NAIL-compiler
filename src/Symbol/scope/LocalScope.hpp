@@ -6,10 +6,8 @@ namespace NAIL_cl {
     class LocalScope : public Scope {
     public:
         explicit LocalScope(std::weak_ptr<Scope> parent = {});
-//
-//        void* createFunction() override;
-//
-//        void* createVariable() override;
+
+        void *createVariable(Token::Token_ptr word_ptr) override;
     };
 
 } // NAIL_cl

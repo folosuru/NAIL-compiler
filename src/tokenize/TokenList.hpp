@@ -21,15 +21,20 @@ namespace NAIL_cl {
 
         Token_ptr getToken(std::size_t);
 
-        std::size_t& getCurrentPos();
+        [[nodiscard]]
+        const std::size_t& getCurrentPos() const;
 
         inline Token_ptr getCurrent() {
             return getToken(getCurrentPos());
         }
 
         Token_ptr consume_current(const std::string& target);
+        Token_ptr consume_current(Token::TokenType target) ;
 
-        bool current_is(Token::TokenType);
+
+        bool current_is(Token::TokenType type);
+
+        void seek_next();
 
     private:
         std::vector<Token_ptr> token_list;

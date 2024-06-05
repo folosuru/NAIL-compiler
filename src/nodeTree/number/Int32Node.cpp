@@ -8,16 +8,15 @@
 namespace NAIL_cl {
     std::shared_ptr<Node_parent> Int32Node::consume(std::shared_ptr<Scope> scope,
                                                     const std::shared_ptr<TokenList> &list) {
-        if (auto current_tok = list->getCurrent(); current_tok->getType() == Token::TokenType::number) {
-            std::shared_ptr<Token::NumberToken> token = std::reinterpret_pointer_cast<Token::NumberToken>(current_tok);
-            list->getCurrentPos()++;
-            return std::make_shared<Int32Node>(scope, static_cast<std::int32_t>(token->value), current_tok);
+        if (auto current = list->consume_current(Token::TokenType::number)) {
+            std::shared_ptr<Token::NumberToken> token = std::reinterpret_pointer_cast<Token::NumberToken>(current);
+            return std::make_shared<Int32Node>(scope, static_cast<std::int32_t>(token->value), token);
         }
         return nullptr;
     }
 
     Int32Node::Int32Node(std::shared_ptr<Scope> scope, std::int32_t value, Token::Token_ptr token)
-            : Node_parent(std::move(scope), token), value(value) {}
+            : Node_parent(std::move(scope), std::move(token)), value(value) {}
 
     std::shared_ptr<VarTypeBase> Int32Node::getVarType() {
         return IntType::int32;

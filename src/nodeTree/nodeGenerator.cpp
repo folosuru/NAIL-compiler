@@ -3,6 +3,9 @@
 #include <error/ErrorPrinter.hpp>
 #include <Symbol/scope/GlobalScope.hpp>
 #include "nodeTree/syntax/BlockNode.hpp"
+#include "tokenize/TokenUtility.hpp"
+#include "tokenize/token/PreservedSymbol.hpp"
+#include "tokenize/token/IdentifyToken.hpp"
 
 namespace NAIL_cl::Node {
     NodeType identify(const std::shared_ptr<TokenList>& list, const std::shared_ptr<Scope>& scope) {
@@ -39,6 +42,17 @@ namespace NAIL_cl::Node {
                 ErrorPrinter::print(list, list->getCurrent(), "unexpected token: except )", ")");
             }
             return result;
+        }
+        if (auto token = TokenUtil::consume_current<Token::PreservedSymbol>(list)) {
+            if (token->getSymbolType() == Token::PreservedSymbol::Symbol_type::kw_var) {
+                auto name = TokenUtil::consume_current<Token::IdentifyToken>(list);
+                if (name == nullptr) {
+                    ErrorPrinter::print(list, list->getCurrent(),
+                                        "unexpected token: need identifier at variable define", "<name>");
+                }
+                scope->createVariable(name);
+                return 0; // これ多分、変数のnodeじゃなくてただの変数のNodeで十分だね。
+            }
         }
 
         result = function_call(list, scope);

@@ -7,6 +7,8 @@
 namespace NAIL_cl::Token {
         class EofToken : public Token {
         public:
+            constexpr static TokenType static_type = TokenType::eof;
+
             EofToken(const TokenList&);
 
             ~EofToken() override = default;

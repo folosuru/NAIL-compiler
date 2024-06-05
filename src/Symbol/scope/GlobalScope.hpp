@@ -6,6 +6,8 @@ namespace NAIL_cl {
     class GlobalScope : public Scope {
         using Scope::Scope;
 
+        void *createVariable(Token::Token_ptr word_ptr) override;
+
     };
 
 } // NAIL_cl

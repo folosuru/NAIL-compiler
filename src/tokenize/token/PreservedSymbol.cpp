@@ -26,7 +26,7 @@ namespace NAIL_cl::Token {
                 text = std::string_view(str.begin() + start, str.begin() + pos);
 
                 // このn文字で終わりか、n+1文字目が変数名に使える名前でない -> このトークンは3文字である
-                if (str.length() <= pos + 1 || !IdentifyToken::is_identify_char(str.at(pos+1))) {
+                if (str.length() <= pos + 1 || !IdentifyToken::is_identify_char(str.at(pos))) {
                     if (text == "for") {
                         result = Symbol_type::kw_for;
                         break;

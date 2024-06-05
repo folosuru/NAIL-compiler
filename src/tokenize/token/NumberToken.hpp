@@ -6,6 +6,8 @@ namespace NAIL_cl::Token {
 
     class NumberToken : public Token{
     public:
+        constexpr static TokenType static_type = TokenType::number;
+
         NumberToken(std::string_view name,
                              std::size_t line,
                              std::int64_t pos,

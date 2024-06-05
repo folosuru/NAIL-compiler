@@ -2,6 +2,7 @@
 #define NAIL_CL_OBJECTBASE_HPP
 #include <string_view>
 #include <string>
+#include <tokenize/token/Token.hpp>
 namespace NAIL_cl {
 
     class ObjectBase {
@@ -10,6 +11,8 @@ namespace NAIL_cl {
         const std::string& getName() const;
 
         explicit ObjectBase(std::string);
+
+        explicit ObjectBase(const Token::Token_ptr& );
     private:
         std::string name;
     };

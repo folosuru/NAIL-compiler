@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <Symbol/ObjectBase.hpp>
 #include <vector>
+#include <nodeTree/Node.hpp>
+#include <tokenize/token/Token.hpp>
 namespace NAIL_cl {
     class Scope;
     class IdentifyNode;
@@ -14,14 +16,14 @@ namespace NAIL_cl {
 
         }
 //
-//        virtual void* createVariable() = 0;
+        virtual void *createVariable(Token::Token_ptr word_ptr) = 0;
 //
 //        virtual void* createFunction() = 0;
 //
         // あくまでスコープを解決する = only call in resolve "::"
         // std::shared_ptr<Scope> resolve_scope(std::string );
 
-        void* resolve_object(const std::string&);
+        std::shared_ptr<ObjectBase> resolve_object(const std::string&);
 
     protected:
         [[nodiscard]]
