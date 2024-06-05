@@ -3,21 +3,22 @@
 #include <Symbol/ObjectBase.hpp>
 #include <type/VarTypeBase.hpp>
 #include <cstdint>
-namespace NAIL_cl {
 
+namespace NAIL_cl::Object {
     class LocalVariable : public ObjectBase {
     public:
         LocalVariable(const Token::Token_ptr&, VarType type);
 
-        [[nodiscard]] VarType getType() const {
+        [[nodiscard]]
+        VarType getVarType() const override {
             return type;
         }
 
     private:
-        std::int32_t offset{};
+        int32_t offset{};
         VarType type;
     };
+}  // NAIL_cl
 
-} // NAIL_cl
 
 #endif //NAIL_CL_LOCALVARIABLE_HPP

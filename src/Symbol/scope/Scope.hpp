@@ -7,6 +7,7 @@
 #include <vector>
 #include <nodeTree/Node.hpp>
 #include <tokenize/token/Token.hpp>
+
 namespace NAIL_cl {
     class Scope;
     class IdentifyNode;
@@ -16,20 +17,22 @@ namespace NAIL_cl {
 
         }
 //
-        virtual void *createVariable(Token::Token_ptr word_ptr) = 0;
+        virtual std::shared_ptr<Object::ObjectBase> createVariable(Token::Token_ptr word_ptr) = 0;
 //
 //        virtual void* createFunction() = 0;
 //
         // あくまでスコープを解決する = only call in resolve "::"
         // std::shared_ptr<Scope> resolve_scope(std::string );
 
-        std::shared_ptr<ObjectBase> resolve_object(const std::string&);
+        std::shared_ptr<Object::ObjectBase> resolve_object(const std::string&);
+
+        bool exist_object(const std::string&);
 
     protected:
         [[nodiscard]]
         std::weak_ptr<Scope> getParent() const noexcept;
 
-        std::unordered_map<std::string, std::shared_ptr<ObjectBase>> symbol;
+        std::unordered_map<std::string, std::shared_ptr<Object::ObjectBase>> symbol;
 
         std::vector<std::shared_ptr<IdentifyNode>> child_node;
     private:

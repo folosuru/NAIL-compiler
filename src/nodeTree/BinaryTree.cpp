@@ -1,7 +1,8 @@
 #include "BinaryTree.hpp"
 #include <Symbol/scope/Scope.hpp>
 #include <utility>
-#include <error/ErrorPrinter.hpp>
+#include <Printer/ErrorPrinter.hpp>
+#include <Printer/Dump.hpp>
 namespace NAIL_cl {
     BinaryTree::BinaryTree(Type type, std::shared_ptr<Scope> scope, NodeType left, NodeType right, Token::Token_ptr list)
             : type(type), Node_parent(std::move(scope), std::move(list)), left(std::move(left)), right(std::move(right)) {}
@@ -12,5 +13,15 @@ namespace NAIL_cl {
             return get<VarType>(result);
         }
         ErrorPrinter::print(position->list, position, "Type Conflict");
+    }
+
+    void BinaryTree::PolishNotation() {
+        Printer::print("(");
+        Printer::print(position);
+        Printer::print(" ");
+        left->PolishNotation();
+        Printer::print(" ");
+        right->PolishNotation();
+        Printer::print(")");
     }
 } // NAIL_cl

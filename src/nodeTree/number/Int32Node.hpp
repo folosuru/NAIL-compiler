@@ -17,6 +17,9 @@ namespace NAIL_cl {
         static std::shared_ptr<Node_parent> consume(std::shared_ptr<Scope>, const std::shared_ptr<TokenList>& list);
 
         std::shared_ptr<VarTypeBase> getVarType() override;
+
+        void PolishNotation() override;
+
     private:
         std::int32_t value;
     };

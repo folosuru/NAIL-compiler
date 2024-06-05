@@ -4,6 +4,7 @@
 #include <Symbol/scope/Scope.hpp>
 #include <utility>
 #include <type/IntType.hpp>
+#include <Printer/Dump.hpp>
 
 namespace NAIL_cl {
     std::shared_ptr<Node_parent> Int32Node::consume(std::shared_ptr<Scope> scope,
@@ -20,5 +21,12 @@ namespace NAIL_cl {
 
     std::shared_ptr<VarTypeBase> Int32Node::getVarType() {
         return IntType::int32;
+    }
+
+    void Int32Node::PolishNotation() {
+        Printer::print("( Number ");
+        Printer::print(value);
+        Printer::print(")")
+
     }
 } // NAIL_cl

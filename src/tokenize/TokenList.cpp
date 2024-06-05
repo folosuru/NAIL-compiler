@@ -7,6 +7,7 @@
 #include <tokenize/token/PreservedSymbol.hpp>
 #include <tokenize/token/NumberToken.hpp>
 #include <tokenize/token/EofToken.hpp>
+#include <Printer/Dump.hpp>
 namespace NAIL_cl {
     using Token_ptr = std::shared_ptr<Token::Token>;
 
@@ -46,10 +47,9 @@ namespace NAIL_cl {
     }
 
     void TokenList::print() {
-        for (const auto& i : token_list) {
-            std::cout << "<" << Token::Token::getTypeName(i->getType()) << " \"" << i->getString() << "\">, ";
-        }
-        std::cout << "\n";
+        Printer::Dump_list("TOKEN DUMP", token_list, [](const Token_ptr& i){
+            return std::string(Token::Token::getTypeName(i->getType())) + " \"" + std::string(i->getString()) + "\"";
+        });
     }
 
     const std::size_t& TokenList::getCurrentPos() const {

@@ -29,6 +29,8 @@ namespace NAIL_cl {
 
         std::shared_ptr<VarTypeBase> getVarType() override;
 
+        void PolishNotation() override;
+
     };
 
 

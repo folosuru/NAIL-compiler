@@ -3,8 +3,9 @@
 #include <string_view>
 #include <string>
 #include <tokenize/token/Token.hpp>
-namespace NAIL_cl {
+#include <type/VarTypeBase.hpp>
 
+namespace NAIL_cl::Object {
     class ObjectBase {
     public:
         [[nodiscard]]
@@ -13,11 +14,16 @@ namespace NAIL_cl {
         explicit ObjectBase(std::string);
 
         explicit ObjectBase(const Token::Token_ptr& );
+
+        [[nodiscard]]
+        virtual VarType getVarType() const = 0;
+
     private:
         std::string name;
     };
+}
 
 
-} // NAIL_cl
+// NAIL_cl
 
 #endif //NAIL_CL_OBJECTBASE_HPP

@@ -21,23 +21,8 @@ int main(int argc, char** argv) {
 
         std::shared_ptr<NAIL_cl::TokenList> token = std::make_shared<NAIL_cl::TokenList>(text);
         token->print();
-        std::list<std::shared_ptr<NAIL_cl::asm_obj::instruction>> result;
+
+
         auto node = NAIL_cl::Node::generate(token);
-
-        std::ofstream result_file("test/out.s");
-        result_file << ".intel_syntax noprefix\n"
-                     ".globl main\n"
-                     "main:\n"
-                     "  push rbp\n"
-                     "  mov rbp, rsp\n";
-        for (const auto& i : result) {
-            result_file << "  " << i->getString() << "\n";
-        }
-        result_file <<
-                "  pop rax\n"
-                "  mov rsp, rbp\n"
-                "  pop rbp\n"
-                "  ret\n";
     }
-
 }

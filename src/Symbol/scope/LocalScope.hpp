@@ -7,7 +7,7 @@ namespace NAIL_cl {
     public:
         explicit LocalScope(std::weak_ptr<Scope> parent = {});
 
-        void *createVariable(Token::Token_ptr word_ptr) override;
+        std::shared_ptr<Object::ObjectBase> createVariable(Token::Token_ptr word_ptr) override;
     };
 
 } // NAIL_cl

@@ -16,7 +16,7 @@ namespace NAIL_cl {
         std::shared_ptr<VarTypeBase> getVarType() override;
     private:
         std::string str;
-        std::shared_ptr<ObjectBase> symbol;
+        std::shared_ptr<Object::ObjectBase> symbol;
     };
 
 } // NAIL_cl

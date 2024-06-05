@@ -1,6 +1,6 @@
 #include <nodeTree/NodeGenerator.hpp>
 #include <nodeTree/NodeIncludeList.hpp>
-#include <error/ErrorPrinter.hpp>
+#include <Printer/ErrorPrinter.hpp>
 #include <Symbol/scope/GlobalScope.hpp>
 #include "nodeTree/syntax/BlockNode.hpp"
 #include "tokenize/TokenUtility.hpp"
@@ -49,6 +49,10 @@ namespace NAIL_cl::Node {
                 if (name == nullptr) {
                     ErrorPrinter::print(list, list->getCurrent(),
                                         "unexpected token: need identifier at variable define", "<name>");
+                }
+                if (scope->exist_object(std::string(name->getString()))) {
+                    ErrorPrinter::print(list, name,
+                                        "This name is already used in this scope");
                 }
                 scope->createVariable(name);
                 return 0; // これ多分、変数のnodeじゃなくてただの変数のNodeで十分だね。
@@ -129,9 +133,10 @@ namespace NAIL_cl::Node {
     }
 
     NodeType generate(const std::shared_ptr<TokenList>& list ) {
-        std::shared_ptr<BlockNode> node = std::make_shared<BlockNode>(std::make_shared<GlobalScope>(), list->getCurrent());
+        auto scope = std::make_shared<GlobalScope>();
+        std::shared_ptr<BlockNode> node = std::make_shared<BlockNode>(scope, list->getCurrent());
         while (!list->current_is(Token::TokenType::eof)) {
-            node->addChild(statement(list, std::make_shared<GlobalScope>()));
+            node->addChild(statement(list, scope));
         }
         return node;
     }

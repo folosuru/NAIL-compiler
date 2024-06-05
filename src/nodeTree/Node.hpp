@@ -20,6 +20,8 @@ namespace NAIL_cl {
 
         virtual std::shared_ptr<VarTypeBase> getVarType() = 0;
 
+        virtual void PolishNotation() = 0;
+
     protected:
         std::shared_ptr<Scope> scope;
 
