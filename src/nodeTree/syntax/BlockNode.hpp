@@ -10,6 +10,7 @@ namespace NAIL_cl {
         ~BlockNode() override = default;
         void addChild(const NodeType&);
         std::shared_ptr<VarTypeBase> getVarType() override;
+        void PolishNotation() override;
     private:
         std::vector<NodeType> child;
     };

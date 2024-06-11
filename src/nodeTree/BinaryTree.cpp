@@ -17,7 +17,7 @@ namespace NAIL_cl {
 
     void BinaryTree::PolishNotation() {
         Printer::print("(");
-        Printer::print(position);
+        Printer::print(position->getString());
         Printer::print(" ");
         left->PolishNotation();
         Printer::print(" ");

@@ -1,6 +1,7 @@
 #include "IdentifyNode.hpp"
 #include "tokenize/token/IdentifyToken.hpp"
 #include <Symbol/scope/Scope.hpp>
+#include <Printer/Dump.hpp>
 #include <utility>
 
 namespace NAIL_cl {
@@ -18,5 +19,11 @@ namespace NAIL_cl {
 
     std::shared_ptr<VarTypeBase> IdentifyNode::getVarType() {
         return std::shared_ptr<VarTypeBase>();
+    }
+
+    void IdentifyNode::PolishNotation() {
+        Printer::print("( Identify ");
+        Printer::print(str);
+        Printer::print(" )");
     }
 }

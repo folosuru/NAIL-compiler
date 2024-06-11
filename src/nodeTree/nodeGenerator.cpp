@@ -55,7 +55,7 @@ namespace NAIL_cl::Node {
                                         "This name is already used in this scope");
                 }
                 scope->createVariable(name);
-                return 0; // これ多分、変数のnodeじゃなくてただの変数のNodeで十分だね。
+                return std::make_shared<IdentifyNode>(scope, std::string(name->getString()), name); // これ多分、変数のnodeじゃなくてただの変数のNodeで十分だね。
             }
         }
 

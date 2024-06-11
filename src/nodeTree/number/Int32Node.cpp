@@ -26,7 +26,7 @@ namespace NAIL_cl {
     void Int32Node::PolishNotation() {
         Printer::print("( Number ");
         Printer::print(value);
-        Printer::print(")")
+        Printer::print(")");
 
     }
 } // NAIL_cl
