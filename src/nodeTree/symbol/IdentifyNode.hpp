@@ -16,6 +16,8 @@ namespace NAIL_cl {
         std::shared_ptr<VarTypeBase> getVarType() override;
 
         void PolishNotation() override;
+
+        void assign(NodeType);
     private:
         std::string str;
         std::shared_ptr<Object::ObjectBase> symbol;

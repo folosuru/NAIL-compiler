@@ -2,7 +2,6 @@
 #define NAIL_CL_NODE_HPP
 #include <memory>
 #include <list>
-#include <backend/assembly/instruction/Instruction.hpp>
 #include "type/VarTypeBase.hpp"
 #include <tokenize/token/Token.hpp>
 namespace NAIL_cl {
@@ -10,6 +9,11 @@ namespace NAIL_cl {
 
     class Node_parent {
     public:
+        enum class NodeKind {
+            binary,
+            arrow,
+            identify
+        };
 
         explicit Node_parent(std::shared_ptr<Scope>, Token::Token_ptr token);
         Node_parent() = delete;
@@ -25,6 +29,9 @@ namespace NAIL_cl {
         virtual void printAsmPush(std::string &) = 0;
 
         virtual void printAsmPtrPush(std::string &) = 0;
+
+        [[nodiscard]]
+        virtual bool isKindOf(NodeKind) const = 0;
 
     protected:
         std::shared_ptr<Scope> scope;

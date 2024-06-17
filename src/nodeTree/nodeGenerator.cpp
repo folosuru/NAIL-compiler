@@ -119,7 +119,7 @@ namespace NAIL_cl::Node {
     NodeType assign(const std::shared_ptr<TokenList>& token, const std::shared_ptr<Scope>& scope) {
         auto left = add(token, scope);
         while (auto current = token->consume_current("->")) {
-            left = BinaryTree::create(BinaryTree::Type::assign, scope, left, assign(token, scope), current);
+            left = BinaryTree::create(BinaryTree::Type::arrow, scope, left, assign(token, scope), current);
         }
         return left;
     }

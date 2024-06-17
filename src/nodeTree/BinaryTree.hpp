@@ -13,7 +13,7 @@ namespace NAIL_cl {
             div,
 
             member_access,
-            assign
+            arrow
         };
 
         const Type type;
