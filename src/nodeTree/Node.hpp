@@ -22,6 +22,10 @@ namespace NAIL_cl {
 
         virtual void PolishNotation() = 0;
 
+        virtual void printAsmPush(std::string &) = 0;
+
+        virtual void printAsmPtrPush(std::string &) = 0;
+
     protected:
         std::shared_ptr<Scope> scope;
 

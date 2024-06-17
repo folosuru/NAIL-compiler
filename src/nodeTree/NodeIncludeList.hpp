@@ -5,6 +5,7 @@
 #include "BinaryTree.hpp"
 #include <nodeTree/BinaryTree.hpp>
 #include <nodeTree/symbol/IdentifyNode.hpp>
+#include <nodeTree/ArrowNode.hpp>
 #include <nodeTree/syntax/BlockNode.hpp>
 
 #endif //NAIL_CL_NODEINCLUDELIST_HPP
