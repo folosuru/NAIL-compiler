@@ -1,10 +1,10 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include "tokenize/TokenList.hpp"
-#include <nodeTree/NodeGenerator.hpp>
+#include <frontend/tokenize/TokenList.hpp>
+#include <frontend/nodeTree/NodeGenerator.hpp>
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc == 2) {
         {
             std::ofstream result_file("test/out.s");
@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 
         std::vector<std::string> text;
         std::string buf;
-        while(std::getline(file, buf)) {
+        while (std::getline(file, buf)) {
             text.push_back(buf);
         }
 
@@ -24,7 +24,6 @@ int main(int argc, char** argv) {
 
         auto node = NAIL_cl::Node::generate(token);
         node->PolishNotation();
-
 
     }
 }
