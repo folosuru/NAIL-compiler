@@ -17,12 +17,13 @@ std::shared_ptr<VarTypeBase> BinaryTree::getVarType() {
 }
 
 void BinaryTree::PolishNotation() {
-    Printer::print("(");
-    Printer::print(position->getString());
-    Printer::print(" ");
-    left->PolishNotation();
-    Printer::print(" ");
-    right->PolishNotation();
-    Printer::print(")");
+    Printer::PolishNotation(position->getString(), left, right);
+}
+
+bool BinaryTree::isKindOf(NAIL_cl::Node_parent::NodeKind target) const {
+    if (target == Node_parent::NodeKind::binary) {
+        return true;
+    }
+    return false;
 }
 } // NAIL_cl

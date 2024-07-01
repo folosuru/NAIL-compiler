@@ -1,7 +1,3 @@
-//
-// Created by folosuru on 24/06/25.
-//
-
 #include "IRBase.hpp"
 
 namespace NAIL_cl {

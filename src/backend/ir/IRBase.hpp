@@ -1,8 +1,8 @@
 #ifndef NAIL_CL_SRC_BACKEND_IR_IRBASE_HPP_
 #define NAIL_CL_SRC_BACKEND_IR_IRBASE_HPP_
 
-namespace NAIL_cl {
-namespace backend {
+
+namespace NAIL_cl::backend {
 
 class IRBase {
     enum class IRType {
@@ -12,7 +12,6 @@ class IRBase {
 
 };
 
-} // backend
-} // NAIL_cl
+} // NAIL_cl::backend
 
 #endif //NAIL_CL_SRC_BACKEND_IR_IRBASE_HPP_

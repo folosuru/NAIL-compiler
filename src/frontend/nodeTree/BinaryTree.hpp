@@ -37,6 +37,8 @@ public:
 
     void PolishNotation() override;
 
+    bool isKindOf(NAIL_cl::Node_parent::NodeKind) const override;
+
 };
 
 } // NAIL_cl
